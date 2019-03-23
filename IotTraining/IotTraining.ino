@@ -1,6 +1,6 @@
 
 #include "TenTrackIoT.h"
-TenTrackIoT LED1, LED2, LED3, SW1, SW2, SW3, LDR, HT, RFID, MPU, GPS;
+TenTrackIoT LED5, LED1, LED2, LED3, SW1, SW2, SW3, LDR, HT, RFID, MPU, GPS;
 
 bool state1 = 0;
 bool state2 = 0;
@@ -12,8 +12,7 @@ void setup() {
 
 void loop() {
 
-  //LED.Blink(32, 500);
-  HT.InitDHT(27);
+  LED5.Blink(32, 500);
 
   if (SW1.IsPressed(15)) {
     state1 = LED1.Toggle();
@@ -43,16 +42,16 @@ void loop() {
   }
 
   if (state1) {
-    //Serial.print("LDR Read : ");
-    //Serial.println(LDR.ReadLDR(0));
-    Serial.println(RFID.ReadRFID());
+    Serial.print("LDR : ");
+    Serial.println(LDR.ReadLDR(0));
+    //Serial.println(RFID.ReadRFID());
   }
   if (state2) {
-    //Serial.print("Temperature Read : ");
-    //Serial.println(HT.ReadTemperature());
-    //Serial.print("Humidity Read : ");
-    //Serial.println(HT.ReadHumidity());
-    Serial.println(GPS.ReadLatitude(), 6);
+    Serial.print("Temperature & Humidity : ");
+    Serial.print(HT.ReadTemperature(27));
+    Serial.print(", ");
+    Serial.println(HT.ReadHumidity(27));
+    //Serial.println(GPS.ReadLatitude(), 6);
   }
   
   if (state3) {
